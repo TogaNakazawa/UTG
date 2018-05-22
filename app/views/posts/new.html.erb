@@ -1,0 +1,16 @@
+<div class="container">
+<div class="row">
+  <%= form_for(@post, url:{controller:'posts', action:'create'}) do |f| %>
+   <div class="field">
+     <div class="col-md-4" >
+     <%= f.label :body %>
+     <br>
+     <%= f.text_field :body, size: 140 %>
+         <div class="action">
+         <%= f.submit %>
+        </div>
+      </div>
+  </div>
+  <% end %>
+ </div>
+</div>
