@@ -1,0 +1,18 @@
+<div class="main users-edit">
+  <div class="container">
+    <h2>アカウント編集</h2>
+    <div class="form users-form">
+      <div class="form-body">
+
+
+        <%= form_tag user_path, multipart: true, :method => :put do %>
+          <p>ユーザー名</p>
+          <%= text_field_tag :name, value=""%>
+          <p>画像</p>
+          <input name="image" type="file">
+        <%= submit_tag "保存" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

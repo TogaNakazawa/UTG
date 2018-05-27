@@ -6,7 +6,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="utg.scss">
   </head>
 
   <body>
@@ -23,7 +22,7 @@
   <ul class="header-menus">
     <% if user_signed_in? %>
       <li>
-        <%= link_to current_user.name, "/users/#{current_user.id}" %>
+        <%= link_to "MyPage", "/users/#{current_user.id}" %>
       </li>
       <li>
         <%= link_to("投稿一覧", "/posts/index") %>
