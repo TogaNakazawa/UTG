@@ -3,13 +3,23 @@
     <h2>アカウント編集</h2>
     <div class="form users-form">
       <div class="form-body">
-
-
-        <%= form_tag user_path, multipart: true, :method => :put do %>
+        <%= form_tag user_path, method: :put, multipart: true do%>
           <p>ユーザー名</p>
           <%= text_field_tag :name, value=""%>
           <p>画像</p>
           <input name="image" type="file">
+          <div class="field">
+           <%= label_tag :community_list, "Community" %><br>
+           <%= text_field_tag 'user[community_list]', @user.community_list.join(',') %>
+          </div>
+          <div class="field">
+           <%= label_tag :interest_list, "Interests" %><br>
+           <%= text_field_tag 'user[interests_list]', @user.interest_list.join(',') %>
+           </div>
+          <div class="field">
+           <%= label_tag :skill_list, "Skills" %><br>
+           <%= text_field_tag 'user[skills_list]', @user.skill_list.join(',') %>
+          </div>
         <%= submit_tag "保存" %>
         <% end %>
       </div>

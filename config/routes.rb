@@ -6,11 +6,11 @@ Rails.application.routes.draw do
    get "/" => "utg#top"
    get "/about" => "utg#about"
    get "/index" => "utg#index"
-   get "/posts/new" => "posts#new"
-  post "/posts/new" => "posts#create"
-  get "/posts/index" => "posts#index"
+   post "/users/:id" =>"users#show"
+resources :posts do
+end
 
-  resources :users do
-   end
+resources :users do
+end
 
 end

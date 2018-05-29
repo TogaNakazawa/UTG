@@ -5,10 +5,14 @@ class User < ApplicationRecord
   validates :email,{uniqueness:true}
   validates :name,{uniqueness:true}
 
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-        def posts
-             return Post.where(user_id: self.id)
-        end
+  acts_as_ordered_taggable_on :communities, :skills, :interests
+          
+
+  def posts
+    return Post.where(user_id: self.id)
+  end
 end
