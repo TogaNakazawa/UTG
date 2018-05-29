@@ -1,22 +1,58 @@
-<section class="container">
-  <div class="row">
-        <div class="main user-show col-md-4 offset-md-4">
-        <div class="user">
-          <%= image_tag("/user_images/#{@user.id}.jpg") %>
-
-          <h2><%= @user.name %></h2>
-          <p><%= @user.email %></p>
-          <% if @user.id == @current_user.id %>
-            <%= link_to "編集", edit_user_path%>
-          <% end %>
-        </div
-        <div class="user_profile col-md-4 offset-md-4">
-          <div class="profile_tag">
-            <p><%= "Profile" %></p>
-              <td><%= @user.community_list %></td>
-              <td><%= @user.interest_list %></td>
-              <td><%= @user.skill_list %></td>
-          </div>
+<div class = "container-fluid">
+  <div class = "row">
+    <div class = "main-left col-md-4">
+      <div class ="friends">
+        <h3><%="Friends"%></h3>
+          <% @Friendships = Friendship.where('to_id =  ? OR from_id =  ?',current_user.id,current_user.id).where(approved:true) %>
+          <% @Friendships.each do |friendship| %>
+            <td>
+              <% if friendship.to_id == current_user.id %>
+                <% friend = User.find(friendship.from_id) %>
+              <% elsif friendship.from_id == current_user.id %>
+                <% friend = User.find(friendship.to_id) %>
+              <% else %>
+                <% friend=nil %>
+              <% end %>
+              <div class="users-index-item">
+                <%if friend!=nil%>
+                  <div class="user-left">
+                    <%= image_tag("/user_images/friend.id.jpg") %>
+                  </div>
+                  <div class="user-right">
+                    <%= link_to friend.name, friends_user_path(user_id:friend.id) %>
+                <%else%>
+                    <%="No friends"%>
+                <%end%>
+                  </div>
+              </div>
+            </td>
+          <%end%>
       </div>
+    </div>
+    <div class = "main-center col-md-4">
+      <div class="user">
+        <%= image_tag("/user_images/#{@user.id}.jpg") %>
+        <h2>
+          <%= @user.name %>
+        </h2>
+        <p>
+          <%= @user.email %>
+        </p>
+        <% if @user.id == @current_user.id %>
+          <%= link_to "編集", edit_user_path%>
+        <% end %>
+        <div class="profile_tag">
+          <p>
+            Profile
+          </p>
+          <td><%= @user.community_list %></td>
+          <td><%= @user.interest_list %></td>
+          <td><%= @user.skill_list %></td>
+        </div>
+      </div>
+    </div>
+    <div class = "main-right col-md-4">
+
+    </div>
   </div>
-</section>
+</div>

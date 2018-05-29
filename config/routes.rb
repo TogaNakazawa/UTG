@@ -13,4 +13,13 @@ end
 resources :users do
 end
 
+resources :friendships do
+    member do
+      post 'accept'
+      post 'from_block'
+      post 'to_block'
+      post 'from_unblock'
+      post 'to_unblock'
+    end
+  end
 end
