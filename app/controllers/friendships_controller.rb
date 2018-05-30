@@ -24,6 +24,7 @@ class FriendshipsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+
   def to_block
     @friend = Friendship.find_by(from_id:params[:from_id], to_id:params[:to_id])
     @friend.to_blocked = true

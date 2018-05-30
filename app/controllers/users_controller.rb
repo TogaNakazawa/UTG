@@ -16,6 +16,7 @@ class UsersController < ApplicationController
    params.require(:user).permit(:name, :community_list, :skill_list, :interest_list)
   end
 
+
   def update
     @user = current_user
 

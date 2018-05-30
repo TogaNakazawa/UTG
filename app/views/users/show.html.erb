@@ -16,7 +16,7 @@
               <div class="users-index-item">
                 <%if friend!=nil%>
                   <div class="user-left">
-                    <%= image_tag("/user_images/friend.image_name") %>
+                    <%= image_tag("/user_images/#{friend.image_name}") %>
                   </div>
                   <div class="user-right">
                     <%= link_to friend.name, user_path(user_id:friend.id) %>
@@ -43,17 +43,18 @@
           <% if @user.id == current_user.id %>
             <%= link_to "編集", edit_user_path,:class => "btn"%>
           <% else %>
-            <%unless Friendship.exists?(to_id:(@user || current_user),from_id:(@user || current_user),approved:(true || false)) then%>
-              <%= link_to "友達になる", friendships_path(:from_id => current_user.id, :to_id => @user.id),:method => :post, :class => "btn" %>
-            <% else %>
-              <% if Friendship.where(from_id:current_user.id, approved:false)%>
-               <%= "友達申請中" %>
-               <%= link_to "申請を取り消す", interrupt_friendship_path%>
-              <% elsif Friendship.where(to_id:current_user.id, approved:false)%>
-               <%= link_to "友達申請を許可する", accept_friendship_url(:from_id => @user.id, :to_id => current_user.id),:method => :post%>
-              <% else Friendship.where('to_id =  ? OR from_id =  ?',current_user.id,current_user.id).where(approved:(true || false))%>
-               <%= "友達" %>
-              <% end %>
+
+          <% if Friendship.exists?(from_id:current_user.id, approved:false)%>
+           <%= "友達申請中" %>
+           <%= link_to "申請を取り消す", interrupt_friendship_path(:from_id => current_user.id, :to_id => @user.id) %>
+          <% elsif Friendship.exists?(to_id:current_user.id, approved:false)%>
+           <%= link_to "友達申請を許可する", accept_friendship_path(:from_id => @user.id, :to_id => current_user.id),:method => :post%>
+          <% elsif Friendship.exists?(to_id: current_user.id, from_id:current_user.id) %>
+           <%= "友達" %>
+          <% else %>
+           <%= link_to "友達になる", friendships_path(:from_id => current_user.id, :to_id => @user.id),:method => :post, :class => "btn" %>
+
+
             <% end %>
           <% end %>
        　</div>

@@ -17,6 +17,7 @@ end
 resources :friendships do
     member do
       post 'accept'
+      get 'interrupt'
       post 'interrupt'
       post 'from_block'
       post 'to_block'
