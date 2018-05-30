@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def show
-   @user = current_user
+    @user=User.find(params[:id])
   end
 
   def index
@@ -19,29 +19,30 @@ class UsersController < ApplicationController
   def update
     @user = current_user
 
-    if params[:name]!=nil
+    if params[:name].present?
       @user.name = params[:name]
     end
 
-    if params[:image]!=nil
-      @user.image_name = "#{@user.id}.jpg"
+    if params[:image].present?
+      random = rand(1..10000)
+      @user.image_name = "#{random}.jpg"
       image = params[:image]
       File.binwrite("public/user_images/#{@user.image_name}", image.read)
     end
 
-    if params[:community_list]!=nil
+    if params[:community_list].present?
       @user.community_name=params[:community_list]
     end
 
-    if params[:interest_list]!=nil
+    if params[:interest_list].present?
       @user.interest_name=[:interest_list]
     end
 
-    if params[:skill_list]!=nil
+    if params[:skill_list].present?
       @user.skill_name=[:skill_list]
     end
 
     @user.save
-    redirect_back(fallback_location: user_path, method: :get)
+    redirect_to :action => "show"
   end
 end

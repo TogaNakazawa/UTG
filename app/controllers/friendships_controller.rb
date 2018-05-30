@@ -1,10 +1,10 @@
 class FriendshipsController < ApplicationController
   def create
     @friends = Friendship.create(from_id:params[:from_id], to_id:params[:to_id])
-    redirect_back(fallback_location: root_path)
+    redirect_to controller: 'users', :action => "show", :id => params[:to_id]
   end
-  
-  def destroy
+
+  def interrupt
     @friend = Friendship.find_by(from_id:params[:from_id], to_id:params[:to_id])
     @friend.delete
     redirect_back(fallback_location: root_path)

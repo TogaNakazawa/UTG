@@ -10,6 +10,9 @@ class User < ApplicationRecord
 
   acts_as_ordered_taggable_on :communities, :skills, :interests
 
+has_many :friendships
+accepts_nested_attributes_for :friendships
+
   def posts
     return Post.where(user_id: self.id)
   end

@@ -3,7 +3,7 @@
     <h2>アカウント編集</h2>
     <div class="form users-form">
       <div class="form-body">
-        <%=form_tag({ :controller => 'users', :action => 'update' },{:method =>:post}) do %>
+        <%=form_tag user_path(),multipart:true, :method => :patch do %>
           <p>ユーザー名</p>
           <%= text_field_tag :name, value=""%>
           <p>画像</p>
