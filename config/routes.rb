@@ -6,15 +6,43 @@ Rails.application.routes.draw do
    get "/" => "utg#top"
    get "/about" => "utg#about"
    get "/index" => "utg#index"
-   get "/posts/new" => "posts#new"
-  post "/posts/new" => "posts#create"
-  get "/posts/index" => "posts#index"
 
   resources :users do
    end
 
    resources :projects do
-     
+
    end
+
+   resources :posts do
+   end
+
+   resources :groups do
+     member do
+       post 'accept'
+       get 'interrupt'
+       post 'interrupt'
+       post 'from_block'
+       post 'to_block'
+       post 'from_unblock'
+       post 'to_unblock'
+       get 'confirm'
+       post 'confirm'
+     end
+   end
+
+
+
+   resources :friendships do
+       member do
+         post 'accept'
+         get 'interrupt'
+         post 'interrupt'
+         post 'from_block'
+         post 'to_block'
+         post 'from_unblock'
+         post 'to_unblock'
+       end
+     end
 
 end

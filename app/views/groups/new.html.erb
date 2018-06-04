@@ -1,0 +1,19 @@
+<div class="main make-group">
+  <div class="container">
+    <h2>グループ作成</h2>
+    <div class="form users-form">
+      <div class="form-body">
+        <%= form_tag confirm_group_path(:id), :method => :post do%>
+          <p>グループ名</p>
+          <%= text_field_tag :name, value=""%>
+
+          <div class="field">
+           <%= label_tag :member_names, "招待" %><br>
+           <%= text_field_tag :member_names%>
+          </div>
+        <%= submit_tag "保存" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

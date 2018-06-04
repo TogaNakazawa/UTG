@@ -35,6 +35,8 @@
       </li>
       <li>
         <%= link_to("Friends", "/users/index") %>
+    </li>
+        <%= link_to "ユーザー一覧",users_path, method: :get%>
       </li>
       <li>
         <%= link_to "ログアウト", { :controller => "devise/sessions", :action => "destroy"},:method => :delete%>

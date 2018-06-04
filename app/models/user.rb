@@ -8,7 +8,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-        def posts
-             return Post.where(user_id: self.id)
-        end
+  acts_as_ordered_taggable_on :communities, :skills, :interests
+
+has_many :friendships
+has_many :group_users
+has_many :groups,through: :group_users
+
+  def posts
+    return Post.where(user_id: self.id)
+  end
 end
