@@ -5,7 +5,8 @@
     </div>
     <div class = "main-center col-md-4">
       <div class= "user">
-      <%eval(@group.member_names).each do |member_name|%>
+        <% h = @group.member_names.split%>
+      <%h.each do |member_name|%>
         <%if User.where(name:member_name).present?%>
           <%@user=User.find_by(name:member_name)%>
           <div class="members-left">

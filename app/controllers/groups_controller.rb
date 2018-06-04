@@ -1,17 +1,22 @@
 class GroupsController < ApplicationController
   def create
-      @group = Group.find_by(id:params[:id])
+      @group = Group.find_by(from_id:current_user.id)
+      @group.member_names = @group.member_names.split(" ")
       eval(@group.member_names).each do |member_name|
          if params[:confirm]==0
-           member.delete
+           member_name.delete
          end
-
        @group.save
-       redirect_to :action=>"show"
+       @group = Group.find_by(from_id:current_user.id)
      end
+     redirect_to group_path(id:@group.id)
   end
+
   def new
    @group = Group.new
+  end
+  def show
+    @group = Group.find_by(id:params[:id])
   end
 
    def group_params
@@ -19,9 +24,9 @@ class GroupsController < ApplicationController
    end
 
   def confirm
-    @group = Group.new(name:params[:name],from_id:current_user.id)
+    @group = Group.new(name:params[:name],from_id:current_user.id,member_names:params[:member_names])
     if params[:member_names].present?
-    @group.member_names = params[:member_names].split(" ")
+    @group.save
     end
 
   end
