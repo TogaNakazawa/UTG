@@ -6,20 +6,24 @@
         <%=form_tag user_path(),multipart:true, :method => :patch do %>
           <p>ユーザー名</p>
           <%= text_field_tag :name, value=""%>
-          <p>画像</p>
+          <p>アイコン画像</p>
           <input name="image" type="file">
+          <p>カバー写真</p>
+          <input name="cover_image" type="file">
+
           <div class="field">
            <%= label_tag :community_list, "Community" %><br>
-           <%= text_field_tag 'user[community_list]', @user.community_list.join(',') %>
+           <%= text_field_tag :community_list, @user.community_list.join(','), "data-role" => "tagsinput"%>
           </div>
           <div class="field">
            <%= label_tag :interest_list, "Interests" %><br>
-           <%= text_field_tag 'user[interests_list]', @user.interest_list.join(',') %>
+           <%= text_field_tag :interest_list, @user.interest_list.join(','), "data-role" => "tagsinput" %>
            </div>
           <div class="field">
            <%= label_tag :skill_list, "Skills" %><br>
-           <%= text_field_tag 'user[skills_list]', @user.skill_list.join(',') %>
+           <%= text_field_tag :skill_list, @user.skill_list.join(','), "data-role" => "tagsinput" %>
           </div>
+
         <%= submit_tag "保存" %>
         <% end %>
       </div>

@@ -1,0 +1,30 @@
+
+<div class = "container-fluid">
+  <div class = "row">
+    <div class = "main-left col-md-4">
+    </div>
+    <div class = "main-center col-md-4">
+      <div class= "user">
+      <%eval(@group.member_names).each do |member_name|%>
+        <%if User.where(name:member_name).present?%>
+          <%@user=User.find_by(name:member_name)%>
+          <div class="members-left">
+            <%= image_tag("/user_images/#{@user.image_name}") %>
+          </div>
+          <div class="members-center">
+            <h2><%= "#{@user.name}"%></h2>
+          <div class="members-right">
+            <%=form_tag groups_path do%>
+            <%= check_box_tag :confirm,1,true%>
+            <%end%>
+        <%else%>
+          <%="No such a user."%>
+        <%end%>
+      <%end%>
+      <%=form_tag groups_path do%>
+       <%= submit_tag "Confirmed"%>
+      <%end%>
+      </div>
+    </div>
+  </div>
+</div>

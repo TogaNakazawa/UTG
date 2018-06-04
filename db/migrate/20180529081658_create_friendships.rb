@@ -6,8 +6,8 @@ class CreateFriendships < ActiveRecord::Migration[5.1]
     t.boolean :to_blocked, default:false
     t.integer :from_id, index: true
     t.integer :to_id, index: true
-    t.integer :common_lessons, default:0
     t.timestamps
-    end
+   end
   end
+    add_column :users, :friends, :string
 end

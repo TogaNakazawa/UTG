@@ -25,22 +25,32 @@ class UsersController < ApplicationController
     end
 
     if params[:image].present?
+      image = params[:image]
       random = rand(1..10000)
       @user.image_name = "#{random}.jpg"
-      image = params[:image]
       File.binwrite("public/user_images/#{@user.image_name}", image.read)
     end
 
+    if params[:cover_image].present?
+      random = rand(1..10000)
+      cover = params[:cover_image]
+      @user.image_cover_name = "#{random}.jpg"
+      File.binwrite("public/user_cover_photos/#{@user.image_cover_name}", cover.read)
+    end
+
+
     if params[:community_list].present?
-      @user.community_name=params[:community_list]
+      @user.community_list=params[:community_list]
+
     end
 
     if params[:interest_list].present?
-      @user.interest_name=[:interest_list]
+      @user.interest_list=params[:interest_list]
     end
 
     if params[:skill_list].present?
-      @user.skill_name=[:skill_list]
+      @user.skill_list=params[:skill_list]
+
     end
 
     @user.save

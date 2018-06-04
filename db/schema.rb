@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529081658) do
+ActiveRecord::Schema.define(version: 20180601072726) do
 
   create_table "friendships", force: :cascade do |t|
     t.boolean "approved", default: false
@@ -22,6 +22,29 @@ ActiveRecord::Schema.define(version: 20180529081658) do
     t.datetime "updated_at", null: false
     t.index ["from_id"], name: "index_friendships_on_from_id"
     t.index ["to_id"], name: "index_friendships_on_to_id"
+  end
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "member_names", null: false
+    t.boolean "approved", default: false
+    t.boolean "from_blocked", default: false
+    t.boolean "to_blocked", default: false
+    t.integer "from_id"
+    t.integer "to_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_id"], name: "index_groups_on_from_id"
+    t.index ["to_id"], name: "index_groups_on_to_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -81,7 +104,9 @@ ActiveRecord::Schema.define(version: 20180529081658) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "friends"
     t.string "image_name", default: "default_user.jpeg"
+    t.string "image_cover_name", default: "default_cover_image.jpg"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

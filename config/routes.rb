@@ -12,6 +12,20 @@ Rails.application.routes.draw do
 resources :posts do
 end
 
+resources :groups do
+  member do
+    post 'accept'
+    get 'interrupt'
+    post 'interrupt'
+    post 'from_block'
+    post 'to_block'
+    post 'from_unblock'
+    post 'to_unblock'
+    get 'confirm'
+    post 'confirm'
+  end
+end
+
 
 
 resources :friendships do

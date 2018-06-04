@@ -15,6 +15,7 @@ class FriendshipsController < ApplicationController
     @friend.approved = true
     @friend.save
     redirect_back(fallback_location: root_path)
+
   end
 
   def from_block
