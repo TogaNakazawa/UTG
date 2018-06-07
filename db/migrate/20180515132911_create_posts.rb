@@ -1,7 +1,8 @@
 class CreatePosts < ActiveRecord::Migration[4.2][5.1]
   def change
     create_table :posts do |t|
-      t.text :body
+      t.string :body
+      t.integer :group_id
       t.timestamps
     end
   end

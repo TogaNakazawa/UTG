@@ -7,14 +7,11 @@ Rails.application.routes.draw do
    get "/about" => "utg#about"
    get "/index" => "utg#index"
 
+
   resources :users do
    end
 
    resources :projects do
-
-   end
-
-   resources :posts do
    end
 
    resources :groups do
@@ -28,6 +25,10 @@ Rails.application.routes.draw do
        post 'to_unblock'
        get 'confirm'
        post 'confirm'
+     end
+     resources :posts do
+       member do
+       end
      end
    end
 

@@ -1,14 +1,43 @@
 <div class = "container-fluid">
   <div class = "row">
-    <div class = "main-left col-md-4">
+    <div class = "main-left col-md-3">
       <div class="members">
-
-      </div>
-    </div>
-    <div class = "main-center col-md-4">
-      <div class="group">
-        
-        <h2><%= @group.name %></h2>
-      </div>
+        <h3>Members</h3>
+        <%@group.users.each do |member|  %>
+         <div class="users-index-item">
+            <div class="user-left">
+              <%= image_tag("/user_images/#{member.image_name}") %>
+            </div>
+            <div class="user-right">
+              <%= link_to member.name, user_path(member.id), :method=>:get%>
+            </div>
+         </div>
+        <%end%>
+       </div>
   </div>
-</div>
+  <div class = "main-center col-md-6 ">
+          <div class="group">
+            <h2><%= @group.name %></h2>
+
+          <%@group.users.each do |member|  %>
+            <% if member.id == current_user.id %>
+             <%= button_to "投稿", new_group_post_path(group_id:@group.id), :method=>:get, :class => "btn btn-info btn-md" %>
+            <% end %>
+          <% end %>
+
+          </div>
+            <div id="single-post-content">
+              <%if @posts.present?%>
+                <%@posts.each do |t|%>
+                <%s=User.find_by(id:t.user_id)%>
+                  <p><%= t.body %></p>
+                  <div class="posted-by">Posted by <%= s.name %></div>
+                  <%= t.created_at%>
+                <%end%>
+              <%else%>
+                  <h3>No posts</h3>
+              <% end %>
+           </div>
+         </div>
+     </div>
+  </div>
