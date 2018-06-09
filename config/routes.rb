@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
 
   resources :users do
+    resources :tags do
+    end
    end
+
+
 
    resources :projects do
    end

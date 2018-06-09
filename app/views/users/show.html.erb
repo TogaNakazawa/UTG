@@ -86,7 +86,7 @@
             <p>コミュニティ</p>
             <% @user.community_list.each do |tag1| %>
             <%user1 = User.tagged_with(tag1)%>
-                <li><a><%= tag1 %><span><%=user1.count%></span></a></li>
+                <li><a><%= link_to tag1, user_tag_path(user_id:@user.id)%><span><%=user1.count%></span></a></li>
             <% end %>
           </div>
 
