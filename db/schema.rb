@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180601072726) do
+ActiveRecord::Schema.define(version: 20180604033527) do
 
   create_table "friendships", force: :cascade do |t|
     t.boolean "approved", default: false
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20180601072726) do
     t.index ["from_id"], name: "index_groups_on_from_id"
     t.index ["to_id"], name: "index_groups_on_to_id"
   end
-ActiveRecord::Schema.define(version: 20180604033527) do
 
   create_table "posts", force: :cascade do |t|
     t.text "body"
@@ -55,14 +54,13 @@ ActiveRecord::Schema.define(version: 20180604033527) do
     t.integer "user_id"
   end
 
-  create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "following_id"
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.integer "required_number"
+    t.integer "founder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
-    t.index ["following_id"], name: "index_relationships_on_following_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -104,10 +102,10 @@ ActiveRecord::Schema.define(version: 20180604033527) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "friends"
     t.string "image_name", default: "default_user.jpeg"
     t.string "image_cover_name", default: "default_cover_image.jpg"
+    t.string "name"
+    t.string "friends"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
