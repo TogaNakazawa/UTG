@@ -1,15 +1,14 @@
 <div class = "container-fluid">
-  <div class = "row">
-    <div class = "main-left col-md-4">
+  <div class ="row">
+    <div class = "main-left col-md-3">
       <div class ="friends">
-
            <%@Friendships = Friendship.where('to_id =  ? OR from_id =  ?',current_user.id,current_user.id).where(approved:true)%>
               <h3><%= "Friends" %><span>(<%=@Friendships.count%>) </span></h3>
                <%@Friendships.each do |friendship|%>
                    <%if friendship.to_id == current_user.id%>
                      <%friend = User.find(friendship.from_id)%>
                    <%elsif friendship.from_id == current_user.id%>
-                     f<%riend = User.find(friendship.to_id)%>
+                     <%friend = User.find(friendship.to_id)%>
                    <%else%>
                      <%friend=nil%>
                    <%end%>
@@ -29,18 +28,25 @@
                 </td>
           <%end%>
       </div>
-
-      <div class = "groups">
-           <h3>My Groups<span>(<%=@user.groups.count%>)</span></h3>
-          <%= link_to "グループを作る", new_group_path%>
+      <div class = "group">
+        <h3><%= "Groups" %><span>(<%=@groups.count%>) </span></h3>
+        <div class = "groups-index-item">
+          <%@groups.each do |f|%>
+          <div class ="group-left">
+           <%=link_to f.name, group_path(id:f.id)%>
+          </div>
+          <%end%>
+        </div>
       </div>
+      <%= link_to "グループを作る", new_group_path%>
     </div>
-    <div class = "main-center col-md-4">
-      <div class="user">
-        <%= image_tag("/user_cover_photos/#{@user.image_cover_name}")%>
-        <%= image_tag("/user_images/#{@user.image_name}") %>
-        <h2><%= @user.name %></h2>
-        <p><%= @user.email %></p>
+    <div class = "main-center col-md-6">
+       <div class="user">
+          <%= image_tag("/user_images/#{@user.image_name}") %>
+          <%= image_tag("/user_cover_photos/#{@user.image_cover_name}") %>
+          <h2><%= @user.name %></h2>
+          <p><%= @user.email %></p>
+
         <div class="btn-info btn-xs ">
 
           <% if @user.id == current_user.id %>
@@ -62,8 +68,19 @@
           <% end %>
        　</div>
 
-       <div class="profile_tag">
+
           <h3>Profile</h3>
+          <div class ="university_tag">
+            <ul>
+            <div class ="university_list">
+              <% @user.university_list.each do |tag0| %>
+              <%user0 = User.tagged_with(tag0)%>
+                  <li><a><%= tag0 %><span><%=user0.count%></span></a></li>
+              <% end %>
+            </div>
+          </ul>
+          </div>
+        <div class="profile_tag">
         <ul>
           <div class = "community_list">
             <p>コミュニティ</p>
@@ -90,11 +107,9 @@
           </div>
          </ul>
         </div>
-
       </div>
     </div>
-    <div class = "main-right col-md-4">
-
+    <div class = "main-right col-md-3">
     </div>
   </div>
 </div>

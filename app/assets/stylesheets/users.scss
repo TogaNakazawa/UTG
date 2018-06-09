@@ -51,9 +51,9 @@
 .user-center {
   text-align: center;
 }
-
 .user {
-  margin-bottom: 20px;
+  border-radius: 40%;
+  position: absolute;
 }
 
 .user img {
@@ -63,8 +63,8 @@
   box-shadow: 0 2px 6px #c1ced7;
   margin: 20px 0 10px;
   object-fit: cover;
-
 }
+
 .main{
   display: flex;
   justify-content:center;
@@ -131,6 +131,61 @@
   color: #fff;
 }
 .profile_tag ul li a:hover span {
+  background-color: #fff;
+  color: #3498db;
+}
+//＃ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+.university_tag ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.university_tag  ul li {
+  display: inline-block;
+  margin: 0 .3em .3em 0;
+  padding: 0;
+}
+.university_tag ul li a {
+  position: relative;
+  display: inline-block;
+  max-width: 100px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 2.5em 0 1em;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #333;
+  font-size: 17px;
+  text-decoration: none;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.university_tag li span {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  background-color: #3498db;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.university_tag ul li a:hover {
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  color: #fff;
+}
+.university_tag ul li a:hover span {
   background-color: #fff;
   color: #3498db;
 }

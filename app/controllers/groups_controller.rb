@@ -1,13 +1,13 @@
 class GroupsController < ApplicationController
   def create
-      @group = Group.find_by(from_id:current_user.id)
-      @group.member_names = @group.member_names.split(" ")
-      eval(@group.member_names).each do |member_name|
-         if params[:confirm]==0
-           member_name.delete
-         end
-       @group.save
-       @group = Group.find_by(from_id:current_user.id)
+      @group = Group.find(params[:id])
+      @group.member_names.split(",").each do |member_name|
+           if params[:confirm]==0
+             member_name.delete
+           end
+      @group.save
+        hoge=User.find_by(name:member_name)
+        GroupUser.create(group_id:@group.id, user_id:hoge.id)
      end
      redirect_to group_path(id:@group.id)
   end
@@ -17,6 +17,7 @@ class GroupsController < ApplicationController
   end
   def show
     @group = Group.find_by(id:params[:id])
+    @posts = Post.where(group_id:@group.id)
   end
 
    def group_params
@@ -24,11 +25,12 @@ class GroupsController < ApplicationController
    end
 
   def confirm
-    @group = Group.new(name:params[:name],from_id:current_user.id,member_names:params[:member_names])
+    @t=params[:member_names].split
+    u=@t.join","
+    s=u+",#{current_user.name}"
     if params[:member_names].present?
-    @group.save
+     @group = Group.create(name:params[:name],from_id:current_user.id,member_names:s)
     end
-
   end
 
   def interrupt

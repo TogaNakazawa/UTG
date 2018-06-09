@@ -1,0 +1,19 @@
+
+.new-post {
+  background-color: white;
+  h1 {
+    text-align: center;
+    margin: 25px 0;
+  }
+  .textfield{
+  width: 100%;
+  }
+}
+.post-index-item{
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  display: table;
+  width: 100%;
+}
