@@ -8,7 +8,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  acts_as_ordered_taggable_on :communities, :skills, :interests
+  acts_as_ordered_taggable_on :communities, :skills, :interests,:universities
 
 has_many :friendships
 has_many :group_user

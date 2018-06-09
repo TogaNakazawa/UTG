@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
   def show
     @user=User.find(params[:id])
+    @user.university_list.add "Todai"
+    @user.save
+
     @groups=current_user.groups
   end
 
@@ -14,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-   params.require(:user).permit(:name, :community_list, :skill_list, :interest_list)
+   params.require(:user).permit(:name, :community_list, :skill_list, :interest_list, :university_list)
   end
 
 
@@ -42,7 +45,6 @@ class UsersController < ApplicationController
 
     if params[:community_list].present?
       @user.community_list=params[:community_list]
-
     end
 
     if params[:interest_list].present?

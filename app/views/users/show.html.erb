@@ -28,17 +28,20 @@
                 </td>
           <%end%>
       </div>
-
-      <div class = "groups">
-      <h3><%= "Groups" %><span>(<%=@groups.count%>) </span></h3>
-        <%@groups.each do |f|%>
-        <%=link_to f.name, group_path(id:f.id)%>
-        <%end%>
+      <div class = "group">
+        <h3><%= "Groups" %><span>(<%=@groups.count%>) </span></h3>
+        <div class = "groups-index-item">
+          <%@groups.each do |f|%>
+          <div class ="group-left">
+           <%=link_to f.name, group_path(id:f.id)%>
+          </div>
+          <%end%>
+        </div>
       </div>
       <%= link_to "グループを作る", new_group_path%>
     </div>
     <div class = "main-center col-md-6">
-      <div class="user">
+       <div class="user">
           <%= image_tag("/user_images/#{@user.image_name}") %>
           <%= image_tag("/user_cover_photos/#{@user.image_cover_name}") %>
           <h2><%= @user.name %></h2>
@@ -65,8 +68,19 @@
           <% end %>
        　</div>
 
-       <div class="profile_tag">
+
           <h3>Profile</h3>
+          <div class ="university_tag">
+            <ul>
+            <div class ="university_list">
+              <% @user.university_list.each do |tag0| %>
+              <%user0 = User.tagged_with(tag0)%>
+                  <li><a><%= tag0 %><span><%=user0.count%></span></a></li>
+              <% end %>
+            </div>
+          </ul>
+          </div>
+        <div class="profile_tag">
         <ul>
           <div class = "community_list">
             <p>コミュニティ</p>
@@ -95,7 +109,7 @@
         </div>
       </div>
     </div>
-    <div class = "main-right col-md-4">
+    <div class = "main-right col-md-3">
     </div>
   </div>
 </div>

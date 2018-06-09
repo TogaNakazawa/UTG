@@ -23,21 +23,28 @@
             <% if member.id == current_user.id %>
              <%= button_to "投稿", new_group_post_path(group_id:@group.id), :method=>:get, :class => "btn btn-info btn-md" %>
             <% end %>
-          <% end %>
+          <% end %>cd utg2
+          
 
           </div>
-            <div id="single-post-content">
-              <%if @posts.present?%>
-                <%@posts.each do |t|%>
-                <%s=User.find_by(id:t.user_id)%>
-                  <p><%= t.body %></p>
-                  <div class="posted-by">Posted by <%= s.name %></div>
-                  <%= t.created_at%>
-                <%end%>
-              <%else%>
-                  <h3>No posts</h3>
-              <% end %>
+          <div class="timeline">
+          <h2>タイムライン</h2>
+            <%if @posts.present?%>
+             <%@posts.each do |t|%>
+              <div class ="post-index-item">
+              　<%s=User.find_by(id:t.user_id)%>
+                <p><%= t.body %></p>
+                <div class="user-left">
+                  <%= image_tag("/user_images/#{s.image_name}") %>
+                </div>
+                <div class="posted-by"><%= link_to s.name, user_path(s.id), :method=>:get%></div>
+                <%= t.created_at%>
+              </div>
+             <%end%>
+            <%else%>
+                <h3>No posts</h3>
+            <% end %>
            </div>
-         </div>
+        </div>
      </div>
   </div>
