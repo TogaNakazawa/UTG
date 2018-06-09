@@ -1,7 +1,9 @@
 class TagsController < ApplicationController
   def index
-    puts "Hello"
+
   end
   def show
+    @user=User.find(params[:user_id])
+    @tag=ActsAsTaggableOn::Tag.find(params[:id])
   end
 end
