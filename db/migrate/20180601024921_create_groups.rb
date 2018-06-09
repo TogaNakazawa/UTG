@@ -9,6 +9,7 @@ class CreateGroups < ActiveRecord::Migration[5.1]
       t.boolean :to_blocked, default:false
       t.integer :from_id, index: true
       t.integer :to_id, index: true
+      t.string :group_image_name, default:"group_default_image.jpeg"
       t.timestamps
     end
   end
