@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180604033527) do
     t.boolean "to_blocked", default: false
     t.integer "from_id"
     t.integer "to_id"
+    t.string "group_image_name", default: "group_default_image.jpeg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from_id"], name: "index_groups_on_from_id"
@@ -61,16 +62,6 @@ ActiveRecord::Schema.define(version: 20180604033527) do
     t.string "content"
     t.integer "required_number"
     t.integer "founder_id"
-<<<<<<< HEAD
-=======
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "following_id"
->>>>>>> 749a56007b12f4a15476a50bd837584db6758a96
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
