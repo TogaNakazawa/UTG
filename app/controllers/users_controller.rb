@@ -4,8 +4,7 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
     @user.university_list.add "Todai"
     @user.save
-
-    @groups=current_user.groups
+    @groups=@user.groups
   end
 
   def index

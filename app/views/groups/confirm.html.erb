@@ -9,12 +9,14 @@
       <%@t.each do |member_name|%>
         <%if User.where(name:member_name).present?%>
           <%@user=User.find_by(name:member_name)%>
-          <div class="members-left">
-            <%= image_tag("/user_images/#{@user.image_name}") %>
-          </div>
-          <div class="members-center">
-            <h2><%= "#{@user.name}"%></h2>
-          <div class="members-right">
+          <div class="users-index-item">
+            <div class="user-left">
+              <%= image_tag("/user_images/#{@user.image_name}") %>
+            </div>
+            <div class="user-right">
+              <h2><%= "#{@user.name}"%></h2>
+            </div>
+          <div class="members?">
             <%=form_tag groups_path do%>
             <%= check_box_tag :confirm,1,true%>
             <%= hidden_field_tag :id, @group.id %>
