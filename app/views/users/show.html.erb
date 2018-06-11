@@ -6,6 +6,7 @@
                 <h3><%= "Friends" %><span>(<%=@Friendships.count%>) </span></h3>
                  <%@Friendships.each do |friendship|%>
                      <%if friendship.to_id == current_user.id%>
+
                        <%@friend = User.find(friendship.from_id)%>
                      <%elsif friendship.from_id == current_user.id%>
                        <%@friend = User.find(friendship.to_id)%>
@@ -45,7 +46,6 @@
         <div class="btn-info btn-xs ">
         　<%= link_to "グループを作る", new_group_path,:class=> "btn"%>
         </div>
-      </div>
       <div class = "main-center col-md-6">
          <div class="user">
             <%= image_tag "/user_images/#{@user.image_name}", id:"avatar" %>
@@ -94,19 +94,7 @@
               <%user1 = User.tagged_with(tag1)%>
                   <li><a><%= tag1 %><span><%=user1.count%></span></a></li>
               <% end %>
-            </div>
-          </ul>
-          </div>
-        <div class="profile_tag">
-        <ul>
-          <div class = "community_list">
-            <p>コミュニティ</p>
-            <% @user.community_list.each do |tag1| %>
-            <%user1 = User.tagged_with(tag1)%>
-                <li><a><%= link_to tag1, user_tag_path(user_id:@user.id)%><span><%=user1.count%></span></a></li>
-            <% end %>
-          </div>
-
+         　 </div>
             <div class ="interest_list">
               <p>興味・関心</p>
               <% @user.interest_list.each do |tag2| %>
@@ -125,6 +113,7 @@
            </ul>
           </div>
         </div>
+
       </div>
       <div class = "main-right col-md-3">
       </div>

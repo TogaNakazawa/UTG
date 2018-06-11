@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20180604033527) do
     t.boolean "to_blocked", default: false
     t.integer "from_id"
     t.integer "to_id"
+    t.string "group_image_name", default: "group_default_image.jpeg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from_id"], name: "index_groups_on_from_id"
@@ -65,16 +66,6 @@ ActiveRecord::Schema.define(version: 20180604033527) do
     t.integer "founder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "following_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
-    t.index ["following_id"], name: "index_relationships_on_following_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -116,10 +107,10 @@ ActiveRecord::Schema.define(version: 20180604033527) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "friends"
     t.string "image_name", default: "default_user.jpeg"
     t.string "image_cover_name", default: "default_cover_image.jpg"
+    t.string "name"
+    t.string "friends"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

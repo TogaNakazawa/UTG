@@ -17,34 +17,10 @@
         </div>
       </ul>
       </div>
-    <div class="profile_tag">
-    <ul>
-      <div class = "community_list">
-        <p>コミュニティ</p>
-        <% @user.community_list.each do |tag1| %>
-        <%user1 = User.tagged_with(tag1)%>
-            <li><a><%= link_to tag1, user_tag_path(user_id:@user.id)%><span><%=user1.count%></span></a></li>
-        <% end %>
-      </div>
 
-      <div class ="interest_list">
-        <p>興味・関心</p>
-        <% @user.interest_list.each do |tag2| %>
-          <%user2 = User.tagged_with(tag2)%>
-            <li><a><%= tag2 %><span><%=user2.count%></span></a></li>
-        <% end %>
-      </div>
+      <%= render 'users/mytag' %>
 
-      <div class ="skill_list">
-        <p>スキル</p>
-        <% @user.skill_list.each do |tag3| %>
-          <%user3 = User.tagged_with(tag3)%>
-             <li><a><%= tag3 %><span><%=user3.count%></span></a></li>
-         <% end %>
-      </div>
-     </ul>
-    </div>
-    </div>
+    
   </div>
     <div class = "main-center col-md-6">
       <div class = "tag-member">
