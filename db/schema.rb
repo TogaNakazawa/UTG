@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20180604033527) do
   create_table "groups", force: :cascade do |t|
     t.string "name", null: false
     t.string "member_names", null: false
+    t.string "groups", default: "group_default_image.jpeg"
+    t.string "group_image_name", default: "group_default_image.jpeg"
     t.integer "member_id"
     t.boolean "approved", default: false
     t.boolean "from_blocked", default: false

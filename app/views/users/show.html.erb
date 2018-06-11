@@ -6,20 +6,21 @@
                 <h3><%= "Friends" %><span>(<%=@Friendships.count%>) </span></h3>
                  <%@Friendships.each do |friendship|%>
                      <%if friendship.to_id == current_user.id%>
-                       <%friend = User.find(friendship.from_id)%>
+
+                       <%@friend = User.find(friendship.from_id)%>
                      <%elsif friendship.from_id == current_user.id%>
-                       <%friend = User.find(friendship.to_id)%>
+                       <%@friend = User.find(friendship.to_id)%>
                      <%else%>
-                       <%friend=nil%>
+                       <%@friend=nil%>
                      <%end%>
                   <td>
                     <div class="users-index-item">
-                      <%if friend.present?%>
+                      <%if @friend.present?%>
                         <div class="user-left">
-                          <%= image_tag("/user_images/#{friend.image_name}") %>
+                          <%= image_tag("/user_images/#{@friend.image_name}") %>
                         </div>
                         <div class="user-right">
-                          <%= link_to friend.name, user_path(friend.id), :method=>:get%>
+                          <%= link_to @friend.name, user_path(@friend.id), :method=>:get%>
                       <%else%>
                           <%="No friends"%>
                       <%end%>
@@ -32,14 +33,19 @@
           <h3><%= "Groups" %><span>(<%=@groups.count%>) </span></h3>
           <div class = "groups-index-item">
             <%@groups.each do |f|%>
-            <div class ="group-left">
+            <%@group=f%>
+            <div class="user-left">
+              <%= image_tag("/group_image/#{@group.group_image_name}") %>
+            </div>
+            <div class ="group-right">
              <%=link_to f.name, group_path(id:f.id)%>
             </div>
             <%end%>
           </div>
         </div>
-        <%= link_to "グループを作る", new_group_path%>
-      </div>
+        <div class="btn-info btn-xs ">
+        　<%= link_to "グループを作る", new_group_path,:class=> "btn"%>
+        </div>
       <div class = "main-center col-md-6">
          <div class="user">
             <%= image_tag "/user_images/#{@user.image_name}", id:"avatar" %>
@@ -68,8 +74,8 @@
             <% end %>
          　</div>
 
-            <%= render "mytag" %>
-
+       <%= render "mytag" %>
+             
       </div>
       <div class = "main-right col-md-3">
       </div>
