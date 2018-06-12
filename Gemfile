@@ -34,6 +34,8 @@ gem 'devise'
 gem 'acts-as-taggable-on', github: 'mbleigh/acts-as-taggable-on', branch: 'master'
 
 gem 'bootsnap'
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
 
 
 # Use Capistrano for deployment

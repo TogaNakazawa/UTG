@@ -1,83 +1,81 @@
 <div class = "container-fluid" style="background-image:url(/user_cover_photos/<%= @user.image_cover_name %>);min-height:100vh; background-size: cover;">
-    <div class ="row" style="background-color:rgba(255,255,255,0.7);min-height:100vh;">
-      <div class = "main-left col-md-3">
-        <div class ="friends">
-             <%@Friendships = Friendship.where('to_id =  ? OR from_id =  ?',current_user.id,current_user.id).where(approved:true)%>
-                <h3><%= "Friends" %><span>(<%=@Friendships.count%>) </span></h3>
-                 <%@Friendships.each do |friendship|%>
-                     <%if friendship.to_id == current_user.id%>
-
-                       <%@friend = User.find(friendship.from_id)%>
-                     <%elsif friendship.from_id == current_user.id%>
-                       <%@friend = User.find(friendship.to_id)%>
-                     <%else%>
-                       <%@friend=nil%>
-                     <%end%>
-                  <td>
-                    <div class="users-index-item">
-                      <%if @friend.present?%>
-                        <div class="user-left">
-                          <%= image_tag("/user_images/#{@friend.image_name}") %>
-                        </div>
-                        <div class="user-right">
-                          <%= link_to @friend.name, user_path(@friend.id), :method=>:get%>
-                      <%else%>
-                          <%="No friends"%>
-                      <%end%>
-                        </div>
-                    </div>
-                  </td>
+  <div class ="row" style="background-color:rgba(255,255,255,0.7);min-height:100vh;">
+    <div class = "main-left col-md-2">
+      <div class ="friends">
+        <%@Friendships = Friendship.where('to_id =  ? OR from_id =  ?',current_user.id,current_user.id).where(approved:true)%>
+          <h3>
+            <%= "Friends" %>
+            <span>
+              (<%=@Friendships.count%>)
+            </span>
+          </h3>
+          <%@Friendships.each do |friendship|%>
+            <%if friendship.to_id == current_user.id%>
+             <%@friend = User.find(friendship.from_id)%>
+            <%elsif friendship.from_id == current_user.id%>
+             <%@friend = User.find(friendship.to_id)%>
+            <%else%>
+              <%@friend=nil%>
             <%end%>
+            <td>
+            <div class="users-index-item">
+            <%if @friend.present?%>
+              <div class="user-left">
+                <%= image_tag("/user_images/#{@friend.image_name}") %>
+              </div>
+              <div class="user-right">
+                <%= link_to @friend.name, user_path(@friend.id), :method=>:get%>
+              </div>
+            <%else%>
+              <%="No friends"%>
+            <%end%>
+            </div>
+            </td>
+           <%end%>
         </div>
         <div class = "group">
           <h3><%= "Groups" %><span>(<%=@groups.count%>) </span></h3>
           <div class = "groups-index-item">
-            <%@groups.each do |f|%>
-            <%@group=f%>
-            <div class="user-left">
-              <%= image_tag("/group_image/#{@group.group_image_name}") %>
-            </div>
-            <div class ="group-right">
-             <%=link_to f.name, group_path(id:f.id)%>
-            </div>
-            <%end%>
+           <%@groups.each do |f|%>
+           <%@group=f%>
+           <div class="user-left">
+            <%= image_tag("/group_image/#{@group.group_image_name}") %>
+           </div>
+          <div class ="group-right">
+           <%=link_to f.name, group_path(id:f.id)%>
+          </div>
+           <%end%>
           </div>
         </div>
         <div class="btn-info btn-xs ">
         　<%= link_to "グループを作る", new_group_path,:class=> "btn"%>
         </div>
-      <div class = "main-center col-md-6">
-         <div class="user">
-            <%= image_tag "/user_images/#{@user.image_name}", id:"avatar" %>
-
-            <h2><%= @user.name %></h2>
-            <p><%= @user.email %></p>
-
-          <div class="btn-info btn-xs ">
-
-            <% if @user.id == current_user.id %>
-              <%= link_to "編集", edit_user_path,:class => "btn"%>
-            <% else %>
-
-            <% if Friendship.exists?(from_id:current_user.id, approved:false)%>
-             <%= "友達申請中" %>
-             <%= link_to "申請を取り消す", interrupt_friendship_path(:from_id => current_user.id, :to_id => @user.id) %>
-            <% elsif Friendship.exists?(to_id:current_user.id, approved:false)%>
-             <%= link_to "友達申請を許可する", accept_friendship_path(:from_id => @user.id, :to_id => current_user.id),:method => :post%>
-            <% elsif Friendship.exists?(approved:true)%>
-             <%= "友達" %>
-            <% else %>
-             <%= link_to "友達になる", friendships_path(:from_id => current_user.id, :to_id => @user.id),:method => :post, :class => "btn" %>
-
-
-              <% end %>
-            <% end %>
-         　</div>
-
+     </div>
+     <div class = "main-center col-md-4 offset-md-2 ">
+      <div class="user">
+       <%= image_tag "/user_images/#{@user.image_name}", id:"avatar" %>
+       <h2><%= @user.name %></h2>
+       <p><%= @user.email %></p>
+       <div class="btn-info btn-md ">
+        <% if @user.id == current_user.id %>
+         <%= link_to "編集", edit_user_path,:class => "btn"%>
+        <% else %>
+         <% if Friendship.exists?(from_id:current_user.id, approved:false)%>
+          <%= "友達申請中" %>
+          <%= link_to "申請を取り消す", interrupt_friendship_path(:from_id => current_user.id, :to_id => @user.id) %>
+         <% elsif Friendship.exists?(to_id:current_user.id, approved:false)%>
+          <%= link_to "友達申請を許可する", accept_friendship_path(:from_id => @user.id, :to_id => current_user.id),:method => :post%>
+         <% elsif Friendship.exists?(approved:true)%>
+          <%= "友達" %>
+         <% else %>
+          <%= link_to "友達になる", friendships_path(:from_id => current_user.id, :to_id => @user.id),:method => :post, :class => "btn" %>
+         <% end %>
+        <% end %>
+     　 </div>
        <%= render "mytag" %>
-             
-      </div>
-      <div class = "main-right col-md-3">
-      </div>
-    </div>
+     </div>
+     <div class = "main-right col-md-3">
+      <div id="calendar"></div>
+     </div>
+  </div>
 </div>
