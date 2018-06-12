@@ -46,6 +46,7 @@
         <div class="btn-info btn-xs ">
         　<%= link_to "グループを作る", new_group_path,:class=> "btn"%>
         </div>
+      </div>
       <div class = "main-center col-md-6">
          <div class="user">
             <%= image_tag "/user_images/#{@user.image_name}", id:"avatar" %>
@@ -75,9 +76,8 @@
          　</div>
 
        <%= render "mytag" %>
-             
-      </div>
-      <div class = "main-right col-md-3">
+
+       <div class = "main-right col-md-3">
       </div>
     </div>
 </div>
