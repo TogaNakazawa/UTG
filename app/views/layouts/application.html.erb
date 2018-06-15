@@ -9,18 +9,12 @@
   </head>
 
   <body>
-
-<header>
-          <div class="header-logo">
-        <% if @current_user %>
-          <%= link_to("UTGathering", "/users/#{current_user.id}") %>
-        <% else %>
-          <%= link_to("UTGathering", "/") %>
-        <% end %>
-
-          </div>
+<% if user_signed_in? %>
+  <header>
+    <div class="header-logo">
+      <%= link_to("UTGathering", "/users/#{current_user.id}") %>
+    </div>
   <ul class="header-menus">
-    <% if user_signed_in? %>
       <li>
         <%= link_to "MyPage", "/users/#{current_user.id}" %>
       </li>
@@ -30,23 +24,11 @@
       <li>
         <%= link_to "ユーザー一覧",users_path, method: :get%>
       </li>
-      <li>
+      <span>
         <%= link_to "ログアウト", { :controller => "devise/sessions", :action => "destroy"},:method => :delete%>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to("UTGとは", "/about") %>
-      </li>
-      <li>
-        <%= link_to("新規登録", { :controller => "devise/registrations", :action => "new"}) %>
-      </li>
-      <li>
-        <%= link_to("ログイン", new_user_session_path) %>
-      </li>
-
-    <% end %>
- </ul>
-</header>
+      </span>
+  </header>
+<% end %>
 
     <%= yield %>
   </body>

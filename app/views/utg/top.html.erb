@@ -1,14 +1,15 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-xs-12 cover-img" style="background-image:url('/user_cover_photos/top_cover.jpg');">
-			<div class="cover-text text-center">
-
-          <h1>Welcome to UTGathering</h1>
-          <h3>Get connected with other students with common views & values.</h3>
-          <h3>Students of "Todai",be united, be one.</h3>
-
+<div class="jumbotron">
+  <div class = "container-fluid">
+    <div class ="row" >
+      <div class="cover-text">
+        <h1>Welcome to UTGathering</h1>
+        <p>Get connected with other students with common views & values.</h3>
+        <p>Students of "Todai",be united, be one.</h3>
+        <%if user_signed_in? == false %>
+          <%= link_to "ログイン",new_user_session_path%>
+          <%= link_to "新規登録", :controller => "devise/registrations",:action => "new"%>
+        <% end %>
       </div>
-			</div>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>

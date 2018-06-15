@@ -10,6 +10,7 @@ body {
   margin: 0;
   min-height: 1vh;
   font-family:"Avenir Next";
+
 }
 
 li {
@@ -17,9 +18,9 @@ li {
 }
 
 header {
-  background-color: #00CCFF;
+  background-color: #006699;
   color: #fff;
-  height: 100px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,15 +29,16 @@ header {
 
 .header-logo {
   float: left;
-  height: 100px;
-  font-size: 36px;
-  padding: 15px 30px;
+  height: 70px;
+  font-size: 20px;
+  padding: 7px 30px;
          color: white;
 
 }
 .header-logo a{
   color: white;
-  font-size: 50px;
+  font-size: 40px;
+
 }
 a {
   color: #fff;
@@ -44,20 +46,48 @@ a {
 }
 .header-menus {
   float: left;
-  height: 100px;
-  padding: 4px 30px;
-         color: #fff;
+  height: 70px;
+  padding: 0px 30px;
+         color: white;
   margin:0;
 
 }
 
 .header-menus li{
   float: left;
-  padding: 30px 30px;
+  padding: 25px 30px;
          color: #fff;
   margin:0;
+  height: 70px;
+  color: white;
 }
-
+.header-menus span{
+  float: right;
+  padding: 25px 25px 0px 500px;
+}
+.header-menus a{
+  color: #fff;
+}
+.jumbotron{
+  background:url('/user_cover_photos/top_cover2.jpg') ;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  text-align: center;
+}
+.cover-text {
+	display: table-cell;
+	vertical-align: middle;
+  text-align: center;
+  color: white;
+  width: 100%;
+  margin-top: 200px;
+}
+.cover-text a{
+  color: white;
+  font-size: 30;
+}
 .top-message {
   display: flex;
   align-items: center;
@@ -181,10 +211,4 @@ a {
 	.cover-img {
 		height: 300px;
 	}
-}
-
-.cover-text {
-	display: table-cell;
-	vertical-align: middle;
-  text-align: center;
 }
